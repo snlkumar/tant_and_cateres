@@ -1,0 +1,31 @@
+<div class="col-md-10 col-md-offset-1">
+  <h2>Items</h2>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Charge</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.charge %></td>
+              <td><%=item.status %></td>
+              <td><%= link_to 'Edit', edit_item_path(item)  %> | <%= link_to 'Destroy', item_path(item),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
