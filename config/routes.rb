@@ -12,14 +12,18 @@ Rails.application.routes.draw do
   end
   root to: 'home#index'
   constraints SubdomainConstraint do
-    resources :items 
+    resources :items do
+      collection do
+        get :search_items
+      end
+    end
     resources :orders do
       member do
         get :items
       end
     end
-    resources :invoices
-  end
+    resources :order_items
+  end  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

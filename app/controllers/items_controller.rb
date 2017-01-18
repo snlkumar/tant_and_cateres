@@ -5,9 +5,10 @@ class ItemsController < ApplicationController
 		@items = Item.all
 	end
 
-	# def search_items
-	# 	Item.search_by(params[:q])
-	# end
+	def search_items
+		items = Item.search_by(params[:input])
+		render json: {items: items}
+	end
 
 	def new		
 	end
