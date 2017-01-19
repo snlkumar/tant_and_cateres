@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
 	end
 
 	def items
-		@items = @order.items
+		@items = @order.order_items.sort_by(&:created_at).map(&:make_response)
 	end
 
 	private

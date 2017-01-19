@@ -22,7 +22,11 @@ Rails.application.routes.draw do
         get :items
       end
     end
-    resources :order_items
+    resources :order_items do
+      collection do
+        get :mark_complete
+      end
+    end
   end  
 
   # Example of regular route:

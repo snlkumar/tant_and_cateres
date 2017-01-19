@@ -3,7 +3,7 @@
     items: @props.items
     itemId: 0
     orderId: @props.order.id
-    quantity: 0
+    quantity: ""
     searchedItems: []
 
   saveItem: (e)->   
@@ -11,12 +11,15 @@
       if @state.quantity== 0 
         alert "invalid"
       else
-        OrderApi.request('/order_items', 'POST', {item_id: @state.itemId, id: 1}, @saveSuccess)
+        OrderApi.request('/order_items', 'POST', {item_id: @state.itemId, quantity: @state.quantity, id: 1}, @saveSuccess)
 
   saveSuccess: (result) ->
     if result.status
       @setState
-        items: result.items
+        items: result.items,
+        quantity: '',
+        name: ''
+
 
   loadItems: (e)->
     input = e.target.value
@@ -30,11 +33,17 @@
     @setState
       quantity: e.target.value
 
-  setItem: (item, e)->
+  selectItem: (item, e)->
     @setState
       name: item.name,
       searchedItems: [],
       itemId: item.id
+
+  inItem: (item, e)->
+    OrderApi.request('/order_items/mark_complete', 'GET', {id: item}, @saveSuccess)
+
+  deleteItem: (item, e) ->
+    OrderApi.request("/order_items/#{item}", 'DELETE', {id: item}, @saveSuccess)
 
   render: ->
     <div className="col-md-10 col-md-offset-1 panel-default">
@@ -49,7 +58,7 @@
 	                <ul ref="playerslist">
 	                  {
 	                    @state.searchedItems.map (((item, index) ->
-	                      <li key={index} onClick ={@setItem.bind(this, item ) } > {item.name}
+	                      <li key={index} onClick ={@selectItem.bind(this, item ) } > {item.name}
 	                      </li>
 	                    ).bind(this))
 	                  }                      
@@ -59,7 +68,7 @@
             </div>
             <div className="control-group">   
               <div className="col-md-6">
-                <input type="text" name="quantity" placeholder= "Quantity" className="form-control" onChange={@getQuantity} onKeyPress={@saveItem} />
+                <input type="text" name="quantity" placeholder= "Quantity" className="form-control" onChange={@getQuantity} value={@state.quantity} onKeyPress={@saveItem} />
               </div>
             </div>
           </form>
@@ -69,23 +78,30 @@
             <table className="table table-striped">
               <thead>
                 <tr>
+                  <th></th>
                   <th>Name</th>
                   <th>Quantity</th>
-                  <th>Charge</th>
+                  <th>Charge/Day</th>
+                  <th>Day(s)</th>
+                  <th>Total Amount</th>
                   <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                { 
-                  debugger
-                  @state.items.map((x, i) ->                    
-                    <tr>
-                      <td>xxx</td>
-                      <td>{x.name}</td>
-                      <td>10</td>
-                      <td>Out</td>
+                {                   
+                  @state.items.map(((item, i) ->
+                    <tr key={i}>
+                      <td>{i+1}</td>
+                      <td>{item.name}</td>
+                      <td>{item.quantity}</td>
+                      <td>{item.daily_charge}</td>
+                      <td>{item.days}</td>
+                      <td>{item.charge}</td>
+                      <td>{item.status}</td>
+                      <td><a href="#" onClick={@inItem.bind(this, item.id)}>In</a> | <a href="#" onClick={@deleteItem.bind(this, item.id)}>Delete</a></td>
                     </tr>
-                  )
+                  ).bind(this))
                 }
               </tbody>
             </table>
