@@ -22,8 +22,12 @@
 
 
   loadItems: (e)->
-    input = e.target.value
-    OrderApi.request('/items/search_items', 'GET', {input}, @showItems)
+    @setState
+      name: e.target.value
+    if e.target.value != ''
+      OrderApi.request('/items/search_items', 'GET', {input: e.target.value}, @showItems)
+    else
+      @setState({ searchedItems: [] })
 
   showItems: (result) ->
     @setState
@@ -55,7 +59,7 @@
               <div className="col-md-6">
                 <input type="text" name="name" placeholder= "Item Name" className="form-control" value={@state.name} onChange={@loadItems} />
                 <div>
-	                <ul ref="playerslist">
+	                <ul ref="playerslist" className="ui-autocomplete">
 	                  {
 	                    @state.searchedItems.map (((item, index) ->
 	                      <li key={index} onClick ={@selectItem.bind(this, item ) } > {item.name}

@@ -1,0 +1,25 @@
+.ui-autocomplete {
+    position: absolute;
+    z-index: 1000;
+    cursor: default;
+    padding: 0;
+    width: 94%;
+    list-style: none;
+    background-color: #ffffff;    
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ui-autocomplete{
+	li {
+	  padding: 3px 20px;
+	}
+	li:hover{
+	  background-color: 'red';
+	}
+}
+

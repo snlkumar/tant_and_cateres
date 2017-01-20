@@ -1,6 +1,9 @@
 class OrderItem < ActiveRecord::Base
 	belongs_to :order
 	belongs_to :item
+	after_create :update_item
+	after_update :reset_left, if: :status_changed?
+	after_destroy :reset_left, if: Proc.new {|p| p.status=='Out'}
 
 	def make_response		
 		resp = self.attributes
@@ -21,6 +24,17 @@ class OrderItem < ActiveRecord::Base
 		else
 			return (updated_at.to_date - created_at.to_date).to_i
 		end
+	end
+
+	def update_item
+		left = item.left - quantity
+		Item.update(self.item.id, left: left )
+	end
+
+	def reset_left
+		Item.update(item_id, left: item.left+quantity )
+		amount = order.amount ? order.amount.to_i+charge.to_i : charge.to_i
+		Order.update(order_id, amount: amount )
 	end
 
 end

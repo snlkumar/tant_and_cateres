@@ -10,6 +10,6 @@ class Item < ActiveRecord::Base
 	end
 
 	def view_format
-		{name: "#{name} (left)", id: id}
+		{name: "#{name} (#{left})", id: id}
 	end
 end
