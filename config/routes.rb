@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
   # devise_for :users
   # scope "/admin" do
@@ -27,7 +28,8 @@ Rails.application.routes.draw do
         get :mark_complete
       end
     end
-  end  
+  end
+  resources :dashboards
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

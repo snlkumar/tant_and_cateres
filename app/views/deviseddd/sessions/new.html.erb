@@ -1,0 +1,27 @@
+<div class="col-md-4 col-md-offset-4 well signin">
+  <h2>Sign in</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.label :email %>
+      <div class="input-group">
+        <%= f.email_field :email, class: 'form-control input-lg', placeholder: 'Email', autofocus: true %>
+        <span class="input-group-addon glyphicon glyphicon-user"></span>
+      </div>
+      
+      <%= f.label :password  %>
+        <div class="input-group">
+          <%= f.password_field :password, class: 'form-control input-lg', placeholder: 'Password' %>
+          <span class="input-group-addon glyphicon glyphicon-lock"></span>
+        </div>
+      
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+      <%= f.submit "Sign in", class: 'btn-primary btn-block btn-lg sgn-btn' %>
+    <% end %>
+    <%= flash_messages layout_flash: false %>
+  <%= render "devise/shared/links" %>
+</div>
