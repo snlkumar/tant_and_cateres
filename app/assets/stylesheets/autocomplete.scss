@@ -1,9 +1,14 @@
+
+html {
+    font-family: sans-serif !important;
+}
+
 .ui-autocomplete {
     position: absolute;
     z-index: 1000;
     cursor: default;
     padding: 0;
-    width: 94%;
+    width: 94.5%;
     list-style: none;
     background-color: #ffffff;    
     -webkit-border-radius: 5px;
@@ -22,4 +27,70 @@
 	  background-color: 'red';
 	}
 }
+
+body{padding:0px !important;}
+
+.top-header nav {
+  background: #ccc none repeat scroll 0 0;
+  border: medium none;
+  margin-bottom:0px;
+  border-radius: 0;
+}
+
+.top-header {
+  background: #ccc none repeat scroll 0 0;
+}
+
+.top-header nav .navbar-brand{
+    padding-left:0px !important;
+}
+
+.top-header nav .right-buttons{
+    margin-right:0px !important;
+}
+
+.edit-list{margin:25px 0 0 0px;}
+
+.sv-btn{float:right; padding: 0 5px 0 0;}
+
+#flash_notice {
+  margin-top: 25px;
+}
+
+.well{margin-top:120px;}
+
+#new_user .input-group {
+  margin: 2px 0 15px;
+}
+
+.sgn-btn{border:none; margin:10px 0 0px;}
+.logout{background:red; color:#fff; border:none;}
+
+.ui-autocomplete li:hover {
+  background: #ccc none repeat scroll 0 0;
+}
+
+.lst-item {
+  float: left;
+  padding: 15px 15px 0 0px;
+}
+
+.lst-item li {
+  display: inline;
+  float: left;
+  text-align:center;
+  padding: 0 10px;
+}
+
+.lst-item li i {
+  font-size: 20px;
+}
+
+.lst-item li span {
+  float: left;
+  font-size: 13px;
+  width: 100%;
+}
+
+.logout{margin-top:16px;}
 

@@ -18,6 +18,7 @@
       @setState
         items: result.items,
         quantity: '',
+        itemId: '',
         name: ''
 
 
@@ -50,7 +51,7 @@
     OrderApi.request("/order_items/#{item}", 'DELETE', {id: item}, @saveSuccess)
 
   render: ->
-    <div className="col-md-10 col-md-offset-1 panel-default">
+    <div className="col-md-12 panel-default edit-list">
       <div className="panel panel-primary">
         <div className="panel-heading">items for order</div>
         <div className="panel-body">

@@ -1,4 +1,5 @@
 class SessionsController < Devise::SessionsController
+  layout "login"
   
   #Overriding Devise's session controller to check for subdomain 
   #Only allow login if subdomain is present and is not www

@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="top-header">
+	<!-- <div class="top-header">
 		<header class="container">
 		  <nav class="navbar navbar-default">
 		    <div class="navbar-header">
@@ -15,19 +15,12 @@
 		    </div>
 		    <% if user_signed_in? %>
 		      <div class="pull-right right-buttons">
-
-		      	<ul class="lst-item">
-		      		   <li><a href="/items/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></a></li>
-		      		   <li><a href="/orders"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span><a/></li>
-		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Sample</span></li>
-		      	</ul>
-
-		        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
+		        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn' %>
 		      </div>		      
 		    <% end %>
 		  </nav>
 		</header>
-	</div>
+	</div> -->
 		<div class="container">
 		  <%= flash_messages if show_layout_flash? %>
 		  <div class="row">

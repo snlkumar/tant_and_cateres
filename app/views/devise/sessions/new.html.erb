@@ -7,12 +7,12 @@
         <span class="input-group-addon glyphicon glyphicon-user"></span>
       </div>
       
-      <%= f.label :password do %>
+      <%= f.label :password  %>
         <div class="input-group">
           <%= f.password_field :password, class: 'form-control input-lg', placeholder: 'Password' %>
           <span class="input-group-addon glyphicon glyphicon-lock"></span>
         </div>
-      <% end %>
+      
 
       <% if devise_mapping.rememberable? -%>
         <div class="field">
@@ -20,7 +20,7 @@
           <%= f.label :remember_me %>
         </div>
       <% end -%>
-      <%= f.submit "Sign in", class: 'btn-primary btn-block btn-lg' %>
+      <%= f.submit "Sign in", class: 'btn-primary btn-block btn-lg sgn-btn' %>
     <% end %>
     <%= flash_messages layout_flash: false %>
   <%= render "devise/shared/links" %>

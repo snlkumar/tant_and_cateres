@@ -1,41 +1,44 @@
-<h2>New Account</h2>
+<div class="col-md-6 col-md-offset-3 panel panel-default">
+  <div class="panel-body">
+    <h2>Create an Account</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+      <div class="form-group ">        
+          <%= f.label :email, class: "control-label required"%>
+        <div>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+      <div class="form-group ">  
+        <%= f.label :password, class: "control-label required" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation , class: "control-label required" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" , class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :mobile , class: "control-label required"%><br />
+        <%= f.text_field :mobile, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :subdomain, class: "control-label required" %><br />
+        <%= f.text_field :subdomain, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address, class: "control-label required" %><br />
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-default btn-primary" %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :mobile %><br />
-    <%= f.text_field :mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :subdomain %><br />
-    <%= f.text_field :subdomain %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

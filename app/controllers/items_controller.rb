@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
 	end
 
 	def create
+		params[:item][:left] = params[:item][:quantity]
 		@item = Item.new params[:item].permit!
 		if @item.save
 			flash[:notice] = "Updated successfuly."

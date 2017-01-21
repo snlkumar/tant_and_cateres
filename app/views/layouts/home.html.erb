@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body background="../assets/img.jpg">
 	<div class="top-header">
 		<header class="container">
 		  <nav class="navbar navbar-default">
@@ -17,8 +17,8 @@
 		      <div class="pull-right right-buttons">
 
 		      	<ul class="lst-item">
-		      		   <li><a href="/items/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></a></li>
-		      		   <li><a href="/orders"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span><a/></li>
+		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></li>
+		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span></li>
 		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Sample</span></li>
 		      	</ul>
 
@@ -34,8 +34,6 @@
 		    <%= yield %>
 		  </div>
 		</div>
-  <!-- <p class="notice"><% notice %></p>
-  <p class="alert"><% alert %></p> -->      
   </body>
 </html>
 
