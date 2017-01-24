@@ -4,6 +4,7 @@
     itemId: 0
     orderId: @props.order.id
     quantity: ""
+    errors: []
     searchedItems: []
 
   saveItem: (e)->   
@@ -20,6 +21,11 @@
         quantity: '',
         itemId: '',
         name: ''
+        errors: []
+    else
+      @setState
+        errors: result.errors
+
 
 
   loadItems: (e)->
@@ -52,6 +58,15 @@
 
   render: ->
     <div className="col-md-12 panel-default edit-list">
+      <div>
+        <ul>
+          {
+            @state.errors.map((msg, i) ->
+              <li>{msg}</li>
+            )
+          }
+        </ul>
+      </div>
       <div className="panel panel-primary">
         <div className="panel-heading">items for order</div>
         <div className="panel-body">

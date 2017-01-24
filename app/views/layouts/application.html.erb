@@ -19,15 +19,11 @@
 		      	<ul class="lst-item">
 		      		   <li><a href="/items/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></a></li>
 		      		   <li><a href="/orders"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span><a/></li>
-		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Sample</span></li>
+		      		   <li><a href="/orders/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>New Order</span></a></li>
 		      	</ul>
 
 		        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
-		      </div>
-		    <% elsif admin_signed_in? %>
-		      <div class="pull-right right-buttons">
-		        <%= link_to 'Sign out', destroy_admin_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
-		      </div>		      
+		      </div>		    		      
 		    <% end %>
 		  </nav>
 		</header>

@@ -42,6 +42,11 @@ class OrdersController < ApplicationController
 		@items = @order.order_items.sort_by(&:created_at).map(&:make_response)
 	end
 
+	def complete
+		@order.complete
+		render json: {orders: Order.all, status: true}
+	end
+
 	private
 	def item
 		@order ||= params[:id] ? Order.find(params[:id]) : Order.new 

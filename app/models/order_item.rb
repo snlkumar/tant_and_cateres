@@ -1,6 +1,7 @@
 class OrderItem < ActiveRecord::Base
 	belongs_to :order
 	belongs_to :item
+	validate :record, on: :create
 	after_create :update_item
 	after_update :reset_left, if: :status_changed?
 	after_destroy :reset_left, if: Proc.new {|p| p.status=='Out'}
@@ -35,6 +36,14 @@ class OrderItem < ActiveRecord::Base
 		Item.update(item_id, left: item.left+quantity )
 		amount = order.amount ? order.amount.to_i+charge.to_i : charge.to_i
 		Order.update(order_id, amount: amount )
+	end
+	
+	def record		
+		if self.order.status == 'In'
+			self.errors[:base] << "This order is not active"
+		elsif self.item.left < self.quantity
+			self.errors[:base] << "Invalid quantity"
+		end
 	end
 
 end

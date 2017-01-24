@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
+  # devise_for :admins
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
   # devise_for :users
   # scope "/admin" do
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
     end
     resources :orders do
       member do
-        get :items
+        get :items, :complete
       end
     end
     resources :order_items do

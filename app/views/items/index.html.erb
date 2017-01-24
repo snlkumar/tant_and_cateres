@@ -8,8 +8,8 @@
           <tr>
             <th>Name</th>
             <th>Quantity</th>
+            <th>Left</th>
             <th>Charge</th>
-            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -18,8 +18,8 @@
             <tr>
               <td><%= item.name %></td>
               <td><%= item.quantity %></td>
+              <td><%= item.left %></td>
               <td><%= item.charge %></td>
-              <td><%=item.status %></td>
               <td><%= link_to 'Edit', edit_item_path(item)  %> | <%= link_to 'Destroy', item_path(item),
             data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
             </tr>

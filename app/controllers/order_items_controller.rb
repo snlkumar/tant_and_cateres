@@ -1,11 +1,15 @@
 class OrderItemsController < ApplicationController
 	# after_action :send_response, except: [:create]
 	before_action :findobj, except: [:create]
-	def create
-		status = false
+	def create		
 		order = Order.find params[:id]
-		status = true if order.order_items.create(item_id: params[:item_id], quantity: params[:quantity])
-		render json: {items: order.order_items.sort_by(&:created_at).map(&:make_response), status: status}
+		orderitem = order.order_items.new(item_id: params[:item_id], quantity: params[:quantity])
+		if orderitem.valid?
+		  orderitem.save
+		  return render json: {items: order.order_items.sort_by(&:created_at).map(&:make_response), status: true}
+		else
+		  return render json: {status: false, errors: orderitem.errors.full_messages}
+		end		
 	end
 
 	def mark_complete
@@ -25,7 +29,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def findobj
-		@oi = OrderItem.find params[:id]
+		@oi = OrderItem.find params[:id]		
 	end
 
 end

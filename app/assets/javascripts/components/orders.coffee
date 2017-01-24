@@ -4,7 +4,15 @@
     itemId: 0
     orderId: 0
     quantity: ""
-    searchedItems: [] 
+    searchedItems: []
+
+  completeOrder: (order, e)->
+    OrderApi.request("/orders/#{order}/complete", 'GET', {}, @saveSuccess)
+
+  saveSuccess: (result) ->
+    if result.status
+      @setState
+        orders: result.orders
 
   render: ->
     <div className="col-md-12 panel-default edit-list">
@@ -21,6 +29,7 @@
                   <th>Mobile</th>
                   <th>Status</th>
                   <th>Amount</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,6 +42,7 @@
                       <td>{order.phone}</td>
                       <td>{order.status}</td>
                       <td>{order.amount}</td>
+                      <td><a href="#" onClick={@completeOrder.bind(this, order.id)}>In</a></td>
                     </tr>
                   ).bind(this))
                 }

@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body background="../assets/img.jpg">
+<body>
 	<div class="top-header">
 		<header class="container">
 		  <nav class="navbar navbar-default">
@@ -23,8 +23,15 @@
 		      	</ul>
 
 		        <%= link_to 'Sign out', destroy_admin_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
-		      </div>		      
-		    <% end %>
+		      </div>
+		    <% else %>
+		      <div class="pull-right right-buttons">
+		      	<ul class="lst-item">
+		      		<li><a href="/admins/sign_in"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Login</span></a></li>
+		      	</ul>
+		      </div>
+
+		    <% end %>		    
 		  </nav>
 		</header>
 	</div>
