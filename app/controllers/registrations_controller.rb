@@ -4,11 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
   #Overriding Devise's registration controller to check for subdomain 
   #Only allow registration if subdomain is absent or is www
   def new 
-    if (request.subdomain.blank? || request.subdomain == "www") 
+    if (request.subdomain.blank? || request.subdomain == "www") && admin_signed_in?
         super
     else
         flash[:notice] = "Access Restricted"
-        redirect_to :root
+        redirect_to admin_session_path
     end
 
   end  
