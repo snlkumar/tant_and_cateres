@@ -5,6 +5,16 @@
     orderId: 0
     quantity: ""
     searchedItems: []
+    startDate: moment(new Date()).format('YYYY-MM-DD')
+    endDate: moment(new Date()).format('YYYY-MM-DD')
+
+  setStartDate: (selected) ->    
+    @setState
+      startDate: moment(selected).format('YYYY-MM-DD')
+
+  setEndDate: (selected) ->
+    @setState
+      endDate: moment(selected).format('YYYY-MM-DD')
 
   completeOrder: (order, e)->
     OrderApi.request("/orders/#{order}/complete", 'GET', {}, @saveSuccess)
@@ -14,12 +24,39 @@
       @setState
         orders: result.orders
 
+  searchOrder: ->
+    OrderApi.request("/orders/search", 'GET', {from: @state.startDate, to: @state.endDate}, @saveSuccess)
+
+  searchByName: (e) ->
+    OrderApi.request("/orders/search", 'GET', {q: e.target.value}, @saveSuccess)
+
   render: ->
     <div className="col-md-12 panel-default edit-list">
       <div className="panel panel-primary">
         <div className="panel-heading">Orders</div>        
         <div className="panel">
           <div className="panel-body">
+            <form className="form-horizontal center">
+              <div className="control-group">
+                <div className="col-md-3">
+                  <DatePicker addClass="input-field align-center form-control" placeholder="Start Date" showSelected={@state.endDate} onSelect={@setStartDate} calendar='false'/>                  
+                </div>
+              </div>
+              <div className="control-group">   
+                <div className="col-md-3">
+                  <DatePicker addClass="input-field align-center form-control" placeholder="End Date" showSelected={@state.endDate} onSelect={@setEndDate} calendar='false'/>
+                </div>
+              </div>
+              <div className="form-group">
+                <div className="col-md-3">
+                  <input type="text" name="search" placeholder= "Name or Mobile" className="form-control" onChange={@searchByName} />
+                </div>
+                <div className="col-md-3">
+                  <a title="Save" href="#" className="btn btn-default btn-primary" onClick={@searchOrder}>Search</a>
+                </div>
+              </div>
+              <hr/>            
+            </form>
             <table className="table table-striped">
               <thead>
                 <tr>

@@ -1,12 +1,17 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user!
-	before_action :item, except: [:index, :create]
+	before_action :item, except: [:index, :create, :search]
 	def index
 		@orders = Order.all
 	end
 
 	def new
 		@order=Order.new
+	end
+
+	def search
+		orders = params[:q] ? Order.search_by_name(params) : Order.search_by_date(params)
+		render json: {orders: orders, status: true}
 	end
 
 	def edit
