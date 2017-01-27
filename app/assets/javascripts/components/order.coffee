@@ -19,7 +19,7 @@
       address: e.target.value
 
   saveOrder: ->
-    data = {name: 'xx', phone: 1234567890}
+    data = {name: @state.name, phone: @state.mobile, address: @state.address}
     OrderApi.request('/orders', 'POST', {order: data}, @saveSuccess)
 
   saveSuccess: (result)->

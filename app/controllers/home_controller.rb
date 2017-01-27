@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		if current_user
 		  redirect_to '/items'
 		elsif request.subdomain.blank?
-			redirect_to '/admins/sign_in'
+			# redirect_to '/admins/sign_in'
 		else
 		  redirect_to '/users/sign_in'
 		end

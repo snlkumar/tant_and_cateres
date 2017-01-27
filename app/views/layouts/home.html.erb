@@ -8,26 +8,26 @@
 </head>
 <body>
 	<div class="top-header">
-		<header class="container">
+		<header class="container home">
 		  <nav class="navbar navbar-default">
 		    <div class="navbar-header">
-		      <%= link_to 'Time Tracker', root_path, class: 'navbar-brand' %>
+		      <%= link_to 'Tent&Cateres', root_path, class: 'navbar-brand' %>
 		    </div>
 		    <% if admin_signed_in? %>
 		      <div class="pull-right right-buttons">
 
 		      	<ul class="lst-item">
-		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></li>
-		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span></li>
-		      		   <li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Sample</span></li>
+		      		<li><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Accounts</span></li>
 		      	</ul>
-
 		        <%= link_to 'Sign out', destroy_admin_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
 		      </div>
 		    <% else %>
 		      <div class="pull-right right-buttons">
 		      	<ul class="lst-item">
-		      		<li><a href="/admins/sign_in"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Login</span></a></li>
+		      		<li><a href="/admins/sign_in">Login</a></li>
+		      		<li><a href="/admins/sign_in">Price</a></li>
+		      		<li><a href="/admins/sign_in">Demo Request</a></li>
+		      		<li><a href="/admins/sign_in">Contact</a></li>
 		      	</ul>
 		      </div>
 

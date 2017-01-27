@@ -12,7 +12,7 @@
       if @state.quantity== 0 
         alert "invalid"
       else
-        OrderApi.request('/order_items', 'POST', {item_id: @state.itemId, quantity: @state.quantity, id: 1}, @saveSuccess)
+        OrderApi.request('/order_items', 'POST', {item_id: @state.itemId, quantity: @state.quantity, id: @state.orderId}, @saveSuccess)
 
   saveSuccess: (result) ->
     if result.status
@@ -119,7 +119,15 @@
                       <td>{item.days}</td>
                       <td>{item.charge}</td>
                       <td>{item.status}</td>
-                      <td><a href="#" onClick={@inItem.bind(this, item.id)}>In</a> | <a href="#" onClick={@deleteItem.bind(this, item.id)}>Delete</a></td>
+                      <td>
+                        <a href="#" onClick={@inItem.bind(this, item.id)}>In</a> | 
+                        {
+                          if item.status == 'Out'
+                            <a href="#" onClick={@deleteItem.bind(this, item.id)}>Delete</a>
+                          else
+                            <s>Delete</s>
+                        }
+                      </td>
                     </tr>
                   ).bind(this))
                 }

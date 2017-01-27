@@ -38,7 +38,7 @@ class OrderItem < ActiveRecord::Base
 		Order.update(order_id, amount: amount )
 	end
 	
-	def record		
+	def record
 		if self.order.status == 'In'
 			self.errors[:base] << "This order is not active"
 		elsif self.item.left < self.quantity

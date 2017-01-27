@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
 
 	private
 	def item
-		@order ||= params[:id] ? Order.find(params[:id]) : Order.new 
+		@order ||= params[:id] ? Order.find(params[:id]) : Order.new
 	end
 
 end
