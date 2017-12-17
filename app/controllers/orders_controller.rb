@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :item, except: [:index, :create, :search]
 	def index
-		@orders = Order.all
+		@orders = Order.all.map(&:check_status)
 	end
 
 	def new
@@ -17,11 +17,12 @@ class OrdersController < ApplicationController
 	def edit
 	end
 
-	def create		
+	def create
+	    # debugger	
 		order = Order.new params[:order].permit!
 		valid = false
 		valid = true if order.save
-		message = valid ? "Updated successfuly." : order.errors.count
+		message = valid ? ["Updated successfuly."] : order.errors.full_messages
 		render json: {id: order.id, valid: valid, message: message}
 	end
 
@@ -51,6 +52,16 @@ class OrdersController < ApplicationController
 		@order.complete
 		render json: {orders: Order.all, status: true}
 	end
+
+	def order_dispatched
+		debugger
+		@order.dispatched
+		render json: {orders: Order.all, status: true}
+	end
+
+	# def order_json
+		
+	# end
 
 	private
 	def item

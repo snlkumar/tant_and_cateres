@@ -11,7 +11,8 @@ Rails.application.routes.draw do
       request.subdomain.present? && !subdomains.include?(request.subdomain)
     end
   end
-  root to: 'home#index'
+  # root to: 'home#index'
+  root to: 'dashboards#index'
   constraints SubdomainConstraint do
     resources :items do
       collection do
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :items, :complete
+        put :order_dispatched
       end
       collection do
         get :search
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
         get :mark_complete
       end
     end
+    resources :calanders
   end
   resources :dashboards
 

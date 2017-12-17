@@ -19,6 +19,9 @@
   completeOrder: (order, e)->
     OrderApi.request("/orders/#{order}/complete", 'GET', {}, @saveSuccess)
 
+  orderDispatched: (order, e) ->
+    OrderApi.request("/orders/#{order}/order_dispatched", 'PUT', {}, @saveSuccess)
+
   saveSuccess: (result) ->
     if result.status
       @setState
@@ -66,6 +69,7 @@
                   <th>Mobile</th>
                   <th>Status</th>
                   <th>Amount</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -79,7 +83,17 @@
                       <td>{order.phone}</td>
                       <td>{order.status}</td>
                       <td>{order.amount}</td>
-                      <td><a href="#" onClick={@completeOrder.bind(this, order.id)}>In</a></td>
+                      <td>{order.outdate}</td>
+                      <td>
+                        {
+                          if (order.status == "Initial" || order.status == "Partialy Dispatched")
+                            <a href="#" onClick={@orderDispatched.bind(this, order.id)}>Dispatch</a>
+                          else if (order.status == "Dispatched" || order.status == "Partialy Completed")
+                            <a href="#" onClick={@completeOrder.bind(this, order.id)}>Complete</a>
+                          
+
+                        }
+                      </td>
                     </tr>
                   ).bind(this))
                 }

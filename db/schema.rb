@@ -57,20 +57,24 @@ ActiveRecord::Schema.define(version: 20170124170531) do
     t.integer  "quantity"
     t.integer  "day"
     t.string   "charge"
-    t.string   "status",     default: "Out"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "status",     default: "Initial"
+    t.integer  "returned"
+    t.datetime "indate"
+    t.datetime "outdate"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "orders", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "address"
-    t.string   "status",     default: "Out"
+    t.string   "status",     default: "Initial"
     t.string   "amount"
     t.datetime "indate"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "outdate"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "users", force: :cascade do |t|

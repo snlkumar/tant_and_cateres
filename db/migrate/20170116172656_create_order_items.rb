@@ -6,7 +6,10 @@ class CreateOrderItems < ActiveRecord::Migration
 			t.integer :quantity
 			t.integer :day
 			t.string :charge
-			t.string :status, default: 'Out'
+			t.string :status, default: 'Initial'
+      t.integer :returned
+      t.datetime :indate
+      t.datetime :outdate
       t.timestamps null: false
     end
   end

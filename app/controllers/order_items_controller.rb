@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
 	before_action :findobj, except: [:create]
 	def create		
 		order = Order.find params[:id]
-		orderitem = order.order_items.new(item_id: params[:item_id], quantity: params[:quantity])
+		orderitem = order.order_items.new(item_id: params[:item_id], quantity: params[:quantity], status: params[:status])
 		if orderitem.valid?
 		  orderitem.save
 		  return render json: {items: order.order_items.sort_by(&:created_at).map(&:make_response), status: true}
@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def mark_complete
-		@oi.complete
+		params[:status]=='O' ? @oi.out : @oi.complete		
 		send_response
 	end
 

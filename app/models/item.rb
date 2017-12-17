@@ -14,7 +14,7 @@ class Item < ActiveRecord::Base
 		{name: "#{name} (#{left})", id: id}
 	end
 
-	def update_left
-		self.left = self.quantity
-	end
+	# def update_left
+	# 	self.left = self.quantity
+	# end
 end

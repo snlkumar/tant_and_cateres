@@ -4,7 +4,9 @@
     name: ""
     mobile: ""
     address: ""
+    date: moment(new Date()).format('YYYY-MM-DD')
     items: []
+    errorMessages: []
 
   getName: (e)->
     @setState
@@ -18,16 +20,36 @@
     @setState
       address: e.target.value
 
+  setDate: (selected) ->    
+    @setState
+      date: moment(selected).format('YYYY-MM-DD')
+
   saveOrder: ->
-    data = {name: @state.name, phone: @state.mobile, address: @state.address}
+    data = {name: @state.name, phone: @state.mobile, address: @state.address, outdate: @state.date, status: 'Initial'}
     OrderApi.request('/orders', 'POST', {order: data}, @saveSuccess)
 
   saveSuccess: (result)->
-    window.location.href = "/orders/#{result.id}/items"
+    if result.valid
+      window.location.href = "/orders/#{result.id}/items"
+    else
+      @setState
+        errorMessages: result.message
 
 
   render: ->
     <div className="col-md-12 panel-default edit-list">
+      <div>
+        {
+          if @state.errorMessages.length > 0
+            <ul id="flash_error">
+              {
+                @state.errorMessages.map((msg, i) ->
+                  <li key={i} >{msg}</li>
+                )
+              }
+            </ul>
+        }
+      </div>
       <div className="panel panel-primary">
         <div className="panel-heading">New Order</div>
         <div className="panel-body">
@@ -38,15 +60,20 @@
               </div>
             </div>
             <div className="control-group">   
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <input type="text" name="phone" placeholder= "Mobile" className="form-control" onChange={@getMobile} />
               </div>
             </div>
-            <div className="form-group">
+            <div className="control-group">   
               <div className="col-md-3">
                 <input type="text" name="address" placeholder= "Address" className="form-control" onChange={@getAddress} />
               </div>
-              <div className="col-md-3">
+            </div>
+            <div className="form-group">
+              <div className="col-md-2">
+                <DatePicker addClass="input-field align-center form-control" placeholder="Date" showSelected={@state.date} onSelect={@setDate} calendar='false'/>
+              </div>
+              <div className="col-md-2">
                 <a title="Save" href="#" className="btn btn-default btn-primary" onClick={@saveOrder}>Save</a>
               </div>
             </div>

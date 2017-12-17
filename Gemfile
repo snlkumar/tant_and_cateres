@@ -30,6 +30,8 @@ gem 'sprockets-coffee-react', '3.4.1'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
 gem "font-awesome-rails"
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

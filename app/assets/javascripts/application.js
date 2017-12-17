@@ -15,6 +15,7 @@
 //= require react
 //= require react_ujs
 //= require reactdatepicker.js
-//= require moment.min.js
+//= require moment 
+//= require fullcalendar
 //= require components
 //= require_tree .
