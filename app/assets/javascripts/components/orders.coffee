@@ -42,7 +42,7 @@
             <form className="form-horizontal center">
               <div className="control-group">
                 <div className="col-md-3">
-                  <DatePicker addClass="input-field align-center form-control" placeholder="Start Date" showSelected={@state.endDate} onSelect={@setStartDate} calendar='false'/>                  
+                  <DatePicker addClass="input-field align-center form-control" placeholder="Start Date" showSelected={@state.endDate} onSelect={@setStartDate} calendar='false' timepicker="true"/>                  
                 </div>
               </div>
               <div className="control-group">   
