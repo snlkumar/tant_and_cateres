@@ -8,6 +8,14 @@
     items: []
     errorMessages: []
 
+  componentDidMount: () ->
+    $('#demo1-1').datetimepicker
+      oneLine: true
+      dateFormat: 'dd M yy'
+      timeFormat: 'hh:mm tt'
+      minDate: new Date
+      onSelect: @setDate
+
   getName: (e)->
     @setState
       name: e.target.value
@@ -20,9 +28,9 @@
     @setState
       address: e.target.value
 
-  setDate: (selected) ->    
+  setDate: (datetimeText, datepickerInstance) ->    
     @setState
-      date: moment(selected).format('YYYY-MM-DD')
+      date: moment(datetimeText).format("YYYY-MM-DD HH:mm:ss")
 
   saveOrder: ->
     data = {name: @state.name, phone: @state.mobile, address: @state.address, outdate: @state.date, status: 'Initial'}
@@ -71,7 +79,8 @@
             </div>
             <div className="form-group">
               <div className="col-md-2">
-                <DatePicker addClass="input-field align-center form-control" placeholder="Date" showSelected={@state.date} onSelect={@setDate} calendar='false'/>
+                
+                <input ref="startdate" id="demo1-1" />
               </div>
               <div className="col-md-2">
                 <a title="Save" href="#" className="btn btn-default btn-primary" onClick={@saveOrder}>Save</a>
