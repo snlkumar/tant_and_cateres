@@ -1,5 +1,5 @@
 # set path to the application
-app_dir git File.expand_path("../..", __FILE__)
+app_dir = File.expand_path("../..", __FILE__)
 shared_dir = "#{app_dir}/shared"
 working_directory app_dir
 
@@ -9,11 +9,11 @@ preload_app true
 timeout 30
 
 # Path for the Unicorn socket
-listen "#{shared_dir}/sockets/unicorn.sock", :backlog => 64
+listen "#{app_dir}/tmp/sockets/unicorn.sock", :backlog => 64
 
 # Set path for logging
 stderr_path "#{shared_dir}/log/unicorn.stderr.log"
 stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 
 # Set proccess id path
-pid "#{shared_dir}/pids/unicorn.pid"
+pid "#{app_dir}/tmp/pids/unicorn.pid"

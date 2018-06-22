@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: tant_and_cateres_production
-  username: tant_and_cateres
-  password: <%= ENV['TANT_AND_CATERES_DATABASE_PASSWORD'] %>
+  username: tent_manager
+  password: advika@manager
