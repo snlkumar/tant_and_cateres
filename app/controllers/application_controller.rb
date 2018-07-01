@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 	protected
 
 	def set_mailer_host
-		debugger
 	    ActionMailer::Base.default_url_options[:host] = request.host_with_port
 	    Time.zone="New Delhi"
 	end
