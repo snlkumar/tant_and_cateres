@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
   # root to: 'home#index'
-  root to: 'dashboards#index'
+  root to: 'home#index'
   constraints SubdomainConstraint do
     resources :items do
       collection do

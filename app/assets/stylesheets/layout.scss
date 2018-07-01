@@ -15,6 +15,15 @@ body {
   @extend .alert-warning;
 }
 
+.navbar-default{
+	background-color: #f8f8f8;
+}
+.top-header {
+    background: #f8f8f8;
+}
+.top-header nav {
+  background: #f8f8f8 none repeat scroll 0 0;
+}
 .navbar .right-buttons {
   margin-right: 15px;
   margin-left: 25px;

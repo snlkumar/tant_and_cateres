@@ -8,15 +8,16 @@ class ApplicationController < ActionController::Base
 	protected
 
 	def set_mailer_host
+		debugger
 	    ActionMailer::Base.default_url_options[:host] = request.host_with_port
 	    Time.zone="New Delhi"
 	end
 
 	def after_sign_in_path_for(resource)
-	  if current_user	
+	  if user_signed_in?
 	    calanders_path	
 	    # items_path
-	  else
+	  elsif admin_signed_in?
 	  	dashboards_path
 	  end
 	end
