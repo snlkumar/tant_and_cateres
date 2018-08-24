@@ -8,6 +8,16 @@
     startDate: moment(new Date()).format('YYYY-MM-DD')
     endDate: moment(new Date()).format('YYYY-MM-DD')
 
+  componentDidMount: () ->
+    startDateTextBox = $('#fromdate')
+    endDateTextBox = $('#enddate')
+    $.timepicker.dateRange startDateTextBox, endDateTextBox,
+      minInterval: 1000 * 60 * 60 * 24 * 4
+      maxInterval: 1000 * 60 * 60 * 24 * 8
+      dateFormat: 'dd M yy'
+      start: {}
+      end: {}
+
   setStartDate: (selected) ->    
     @setState
       startDate: moment(selected).format('YYYY-MM-DD')
@@ -42,12 +52,12 @@
             <form className="form-horizontal center">
               <div className="control-group">
                 <div className="col-md-3">
-                  <DatePicker addClass="input-field align-center form-control" placeholder="Start Date" showSelected={@state.endDate} onSelect={@setStartDate} calendar='false' timepicker="true"/>                  
+                  <input ref="startdate" id="fromdate" />
                 </div>
               </div>
               <div className="control-group">   
                 <div className="col-md-3">
-                  <DatePicker addClass="input-field align-center form-control" placeholder="End Date" showSelected={@state.endDate} onSelect={@setEndDate} calendar='false'/>
+                  <input ref="startdate" id="enddate" />                  
                 </div>
               </div>
               <div className="form-group">

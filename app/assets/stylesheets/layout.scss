@@ -2,6 +2,20 @@ body {
   padding-top: 20px;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #7386D5 !important;
+    border-color: #7386D5 !important;
+}
+
+.panel-primary {    
+    border-color: #7386D5 !important;
+    .panel-heading {
+        color: #fff;
+        background-color: #7386D5;
+        border-color: #7386D5;
+    }
+}
+
 #flash_notice {
   @extend .alert;
   @extend .alert-success;
@@ -16,15 +30,27 @@ body {
 }
 
 .navbar-default{
-	background-color: #f8f8f8;
+	background-color: #7386D5;
+  .navbar-brand {
+    color: white;
+  }
 }
 .top-header {
-    background: #f8f8f8;
+    background: #7386D5;
 }
 .top-header nav {
-  background: #f8f8f8 none repeat scroll 0 0;
+  background: #7386D5 none repeat scroll 0 0;
 }
-.navbar .right-buttons {
-  margin-right: 15px;
-  margin-left: 25px;
+.navbar{
+  .right-buttons {
+    margin-right: 15px;
+    margin-left: 25px;
+    .lst-item{
+      li{
+        a{
+          color: white;
+        }
+      }
+    }
+  }
 }

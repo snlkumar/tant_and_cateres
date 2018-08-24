@@ -64,7 +64,7 @@
 
   changeQuantity: (item, e)->
     debugger
-    OrderApi.request("/order_items/#{item}/changeQuantity", 'PUT', {quantity: e.target.innerHTML}, @saveSuccess)
+    OrderApi.request("/order_items/#{item}/change_quantity", 'PUT', {quantity: e.target.innerHTML}, @saveSuccess)
 
   render: ->
     <div className="col-md-12 panel-default edit-list">

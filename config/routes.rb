@@ -32,6 +32,10 @@ Rails.application.routes.draw do
       collection do
         get :mark_complete
       end
+      member do        
+        put :change_quantity
+      end
+
     end
     resources :calanders
   end

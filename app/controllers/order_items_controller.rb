@@ -17,6 +17,10 @@ class OrderItemsController < ApplicationController
 		send_response
 	end
 
+	def change_quantity
+		debugger
+	end
+
 	def destroy
 		@oi.destroy
 		send_response		
