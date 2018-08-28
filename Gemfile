@@ -33,6 +33,8 @@ gem 'sass-rails', '~> 5.0'
 gem "font-awesome-rails"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'will_paginate', '~> 3.1.0'
+gem 'toastr-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

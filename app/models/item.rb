@@ -3,7 +3,8 @@ class Item < ActiveRecord::Base
 	has_many :orders, through: :order_items
 	accepts_nested_attributes_for :order_items
 	before_save :update_left, if: :quantity_changed?
-
+	validates_uniqueness_of :name
+	self.per_page = 10	
 	class << self
 		def search_by(q)
 			where("name ilike ?", "%#{q}%").map(&:view_format)

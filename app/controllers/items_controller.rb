@@ -1,8 +1,11 @@
 class ItemsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :item, except: [:index, :create, :search_items]
-	def index
-		@items = Item.all
+	def index		
+		@items = Item.paginate(page: params[:page] || 1, per_page: 10).order('updated_at DESC')
+		if request.xhr?
+			render json: {items: @items, next_page: @items.next_page, current_page: @items.current_page, previous_page: @items.previous_page}
+		end
 	end
 
 	def search_items
@@ -19,35 +22,41 @@ class ItemsController < ApplicationController
 	def create
 		params[:item][:left] = params[:item][:quantity]
 		@item = Item.new params[:item].permit!
-		if @item.save
-			flash[:notice] = "Updated successfuly."
-		    redirect_to items_path
+		if @item.save			
+			items = get_items
+		  render json: {message: 'Product Added successfuly.', items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page}
 		else
-			render 'new'
+			render json: {error: @item.errors.full_messages}
 		end
 	end
 
 	def update
-		if @item.update_attributes(params[:item].permit!)
-			flash[:notice] = "Updated successfuly."
-			redirect_to items_path
-		else
-			render 'edit'
+		respond_to do |format|
+			if @item.update_attributes(params[:item].permit!)				
+				items = get_items
+				format.json { render json: {message: 'Product Updated successfuly.', items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page} }
+			else		  
+			  format.json { render json: {error: @item.errors.full_messages }	, status: :unprocessable_entity}
+			end
 		end
 	end
 
 	def destroy
 		if @item.destroy
-			flash[:notice] = "deleted successfuly"
+			flash[:notice] = "Product Deleted successfuly"
+			render json: {items: get_items}
 		else
-			flash[:notice] = "error"			
-		end
-			redirect_to items_path
+			render json: {error: @item.errors.full_messages}
+		end		
 	end
 
 	private
 	def item
 		@item ||= params[:id] ? Item.find(params[:id]) : Item.new 
+	end
+
+	def get_items
+		Item.paginate(page: params[:page] || 1, per_page: 10).order('updated_at DESC')
 	end
 
 end

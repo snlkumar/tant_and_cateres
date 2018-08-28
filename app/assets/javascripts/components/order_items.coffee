@@ -84,8 +84,9 @@
             <div className="panel-body">
               <form className="form-horizontal center">
                 <div className="control-group">
-                  <div className="col-md-6">
-                    <input type="text" name="name" placeholder= "Item Name" className="form-control" value={@state.name} onChange={@loadItems} />
+                  <div className="col-md-4">
+                    <label>Product Name</label>
+                    <input type="text" name="name" placeholder= "Product" autoComplete="off" className="form-control" value={@state.name} onChange={@loadItems} />
                     <div>
                       <ul ref="playerslist" className="ui-autocomplete">
                         {
@@ -99,8 +100,9 @@
                   </div>
                 </div>
                 <div className="control-group">   
-                  <div className="col-md-6">
-                    <input type="text" name="quantity" placeholder= "Quantity" className="form-control" onChange={@getQuantity} value={@state.quantity} onKeyPress={@saveItem} />
+                  <div className="col-md-4">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" placeholder= "Enter quantity and hit enter key" className="form-control" onChange={@getQuantity} value={@state.quantity} onKeyPress={@saveItem} />
                   </div>
                 </div>
               </form>

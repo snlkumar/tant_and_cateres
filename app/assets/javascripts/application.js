@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require jquery-ui/widgets/datepicker
 //= require datetimepicker/jquery-ui-timepicker-addon.min.js
 //= require react
 //= require react_ujs
+//= require toastr
 //= require moment 
 //= require fullcalendar
 //= require components
