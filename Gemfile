@@ -35,6 +35,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'toastr-rails'
+gem 'data-confirm-modal'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

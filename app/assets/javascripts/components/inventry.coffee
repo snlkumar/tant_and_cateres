@@ -21,8 +21,20 @@
       charge: item.charge
       productId: item.id
 
-  deleteItem: (id) -> 
-    alert id
+  deleteItem: (id, e) ->
+    e.preventDefault()
+    dataConfirmModal.confirm
+      title: ''
+      text: 'Do you really want to delete this item?'
+      commit: 'Yes do it'
+      cancel: 'Not really'
+      zIindex: 10099
+      onConfirm: (->
+        OrderApi.request '/items/' + id, 'DELETE', {}, @saveSuccess
+        return
+      ).bind(this)
+      onCancel: ->        
+        return
 
   searchByName: (e) ->
     OrderApi.request("/orders/search", 'GET', {q: e.target.value}, @saveSuccess)
@@ -139,7 +151,7 @@
             </table>            
             {
               if (@state.prevPage || @state.nextPage)                                        
-                <Confirmbox nextPage={@state.nextPage} prevPage={@state.prevPage} currentPage={@state.currentPage} parentCall={@getPaginationData}/>
+                <Pagination nextPage={@state.nextPage} prevPage={@state.prevPage} currentPage={@state.currentPage} parentCall={@getPaginationData}/>
             }
             
             

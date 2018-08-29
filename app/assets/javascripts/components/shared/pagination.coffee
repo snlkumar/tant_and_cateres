@@ -1,4 +1,4 @@
-@Confirmbox = React.createClass
+@Pagination = React.createClass
   getInitialState: ->    
     nextPage: @props.nextPage,
     currentPage: @props.currentPage,
@@ -10,7 +10,8 @@
       currentPage: nextProps.currentPage,
       prevPage: nextProps.prevPage,
 
-  callParentWithPage: (page) ->
+  callParentWithPage: (page, e) ->
+    e.preventDefault()
     @props.parentCall(page)
 
   render: ->

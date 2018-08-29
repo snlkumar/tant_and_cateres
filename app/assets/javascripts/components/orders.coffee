@@ -14,8 +14,8 @@
     $.timepicker.dateRange startDateTextBox, endDateTextBox,
       minInterval: 1000 * 60 * 60 * 24 * 4
       maxInterval: 1000 * 60 * 60 * 24 * 8
-      dateFormat: 'dd M yy'
-      start: {}
+      dateFormat: 'dd M yy'      
+      start: {setDate: new Date()}
       end: {}
 
   setStartDate: (selected) ->    
@@ -43,6 +43,9 @@
   searchByName: (e) ->
     OrderApi.request("/orders/search", 'GET', {q: e.target.value}, @saveSuccess)
 
+  parseOrderDate: (date) ->
+    alert 45
+
   render: ->
     <div className="col-md-12 panel-default edit-list">
       <div className="panel panel-primary">
@@ -50,21 +53,27 @@
         <div className="panel">
           <div className="panel-body">
             <form className="form-horizontal center">
-              <div className="control-group">
+              <div className="control-group has-feedback">
                 <div className="col-md-3">
-                  <input ref="startdate" id="fromdate" />
+                  <label>From Date: </label>
+                  <input ref="startdate" id="fromdate" className="form-control"/>
+                  <i className="fa fa-calendar form-control-feedback"></i>
                 </div>
               </div>
-              <div className="control-group">   
+              <div className="control-group has-feedback">   
                 <div className="col-md-3">
-                  <input ref="startdate" id="enddate" />                  
+                  <label>To Date: </label>
+                  <input ref="startdate" id="enddate" className="form-control"/>
+                  <i className="fa fa-calendar form-control-feedback"></i>
                 </div>
               </div>
               <div className="form-group">
                 <div className="col-md-3">
+                  <label>Search by Name Or Mobile</label>
                   <input type="text" name="search" placeholder= "Name or Mobile" className="form-control" onChange={@searchByName} />
                 </div>
                 <div className="col-md-3">
+                  <label></label>
                   <a title="Save" href="#" className="btn btn-default btn-primary" onClick={@searchOrder}>Search</a>
                 </div>
               </div>
@@ -93,9 +102,9 @@
                       <td>{order.phone}</td>
                       <td>{order.status}</td>
                       <td>{order.amount}</td>
-                      <td>{order.outdate}</td>
+                      <td>{new Date(order.outdate).toLocaleString('en-US', {hour12: true})}</td>
                       <td>
-                        {
+                        {                           
                           if (order.status == "Initial" || order.status == "Partialy Dispatched")
                             <a href="#" onClick={@orderDispatched.bind(this, order.id)}>Dispatch</a>
                           else if (order.status == "Dispatched" || order.status == "Partialy Completed")

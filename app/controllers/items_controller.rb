@@ -42,12 +42,14 @@ class ItemsController < ApplicationController
 	end
 
 	def destroy
-		if @item.destroy
-			flash[:notice] = "Product Deleted successfuly"
-			render json: {items: get_items}
-		else
-			render json: {error: @item.errors.full_messages}
-		end		
+		respond_to do |format|
+			if @item.destroy
+				items = get_items
+				format.json { render json: {message: 'Product Deleted successfuly.', items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page} }
+			else
+				format.json { render json: {error: @item.errors.full_messages }	, status: :unprocessable_entity}
+			end
+		end
 	end
 
 	private

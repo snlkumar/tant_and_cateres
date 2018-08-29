@@ -64,24 +64,30 @@
           <form className="form-horizontal center">
             <div className="control-group">
               <div className="col-md-3">
+                 <label>Name: </label> 
                 <input type="text" name="name" placeholder= "Name" className="form-control" onChange={@getName} />
               </div>
             </div>
             <div className="control-group">   
               <div className="col-md-2">
+                 <label>Mobile: </label> 
                 <input type="text" name="phone" placeholder= "Mobile" className="form-control" onChange={@getMobile} />
               </div>
             </div>
             <div className="control-group">   
               <div className="col-md-3">
+                 <label>Address: </label> 
                 <input type="text" name="address" placeholder= "Address" className="form-control" onChange={@getAddress} />
               </div>
             </div>
-            <div className="form-group">
-              <div className="col-md-2">
-                
-                <input ref="startdate" id="demo1-1" />
+            <div className="control-group has-feedback">   
+              <div className="col-md-3">
+                <label>Order Date: </label>
+                <input ref="startdate" id="demo1-1" className="form-control" />
+                <i className="fa fa-calendar form-control-feedback"></i>
               </div>
+            </div>
+            <div className="form-group ">              
               <div className="col-md-2">
                 <a title="Save" href="#" className="btn btn-default btn-primary" onClick={@saveOrder}>Save</a>
               </div>
