@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>T&C</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-	<div class="top-header">
-		<header class="container">
-		  <nav class="navbar navbar-default">
-		    <div class="navbar-header">
-		      <%= link_to 'T&C', root_path, class: 'navbar-brand' %>
-		    </div>
-		    <% if user_signed_in? %>
-		      <div class="pull-right right-buttons">
+	<head>
+	  <title>T&C</title>
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= javascript_include_tag 'application' %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="top-header">
+			<header class="container">
+			  <nav class="navbar navbar-default">
+			    <div class="navbar-header">
+			      <%= link_to 'T&C', root_path, class: 'navbar-brand' %>
+			    </div>
+			    <% if user_signed_in? %>
+			      <div class="pull-right right-buttons">
 
-		      	<ul class="lst-item">
-		      		   <li><a href="/items"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Inventory</span><a/></li>
+			      	<ul class="lst-item">
+			      		   <li><a href="/items"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Inventory</span><a/></li>
 
-		      		   <li><a href="/items/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></a></li>
-		      		   <li><a href="/orders"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span><a/></li>
-		      		   <li><a href="/orders/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>New Order</span></a></li>
-		      	</ul>
+			      		   <li><a href="/items/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Add Item</span></a></li>
+			      		   <li><a href="/orders"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Orders</span><a/></li>
+			      		   <li><a href="/orders/new"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>New Order</span></a></li>
+			      	</ul>
 
-		        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
-		      </div>
-		    <% elsif admin_signed_in? %>
-		      <div class="pull-right right-buttons">
+			        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
+			      </div>
+			    <% elsif admin_signed_in? %>
+			      <div class="pull-right right-buttons">
 
-		      	<ul class="lst-item">
-		      		   <li><a href="/dashboards"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Accounts</span></a></li>
-		      		   <li><a href="/users/sign_up"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>New Account</span><a/></li>
-		      	</ul>
+			      	<ul class="lst-item">
+			      		   <li><a href="/dashboards"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>Accounts</span></a></li>
+			      		   <li><a href="/users/sign_up"><i aria-hidden="true" class="fa fa-plus-circle"></i> <span>New Account</span><a/></li>
+			      	</ul>
 
-		        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
-		      </div>    		      
-		    <% end %>
-		  </nav>
-		</header>
-	</div>
+			        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'btn btn-default navbar-btn logout' %>
+			      </div>    		      
+			    <% end %>
+			  </nav>
+			</header>
+		</div>
 		<div class="container">
 		  <%= flash_messages if show_layout_flash? %>
 		  <div class="row">
 		    <%= yield %>
 		  </div>
 		</div>
-  <!-- <p class="notice"><% notice %></p>
-  <p class="alert"><% alert %></p> -->      
+	  <!-- <p class="notice"><% notice %></p>
+	  <p class="alert"><% alert %></p> -->      
+		<div class="footer">
+		  <p>Footer</p>
+		</div>
   </body>
 </html>
 
