@@ -4,7 +4,7 @@ lock "~> 3.11.0"
 set :application, "tant_and_cateres"
 set :repo_url, "git@github.com:snlkumar/tant_and_cateres.git"
 set :branch, 'master'
-server "139.59.11.5", user: "root", roles: %w{web app}
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -41,18 +41,12 @@ set :rails_env, "production"
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
-# files we want symlinking to specific entries in shared.
-set :linked_files, %w{config/database.yml}
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-set(:config_files, %w(
-  database.example.yml
-))
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 set :ssh_options, verify_host_key: :secure

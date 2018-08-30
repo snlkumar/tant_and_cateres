@@ -45,7 +45,7 @@ gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem "letter_opener"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -60,7 +60,7 @@ group :development do
   # integrate bundler with capistrano
   gem 'capistrano-bundler'
   gem 'web-console', '~> 2.0'
-  gem "letter_opener"
+  # gem "letter_opener"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
