@@ -10,6 +10,7 @@
 
   componentDidMount: () ->
     $('#demo1-1').datetimepicker
+      controlType: 'select'
       oneLine: true
       dateFormat: 'dd M yy'
       timeFormat: 'hh:mm tt'

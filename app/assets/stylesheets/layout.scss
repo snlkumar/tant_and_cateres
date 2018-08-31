@@ -95,6 +95,84 @@ body {
 .form-control-feedback{
   top: 35px !important;
 }
+
+.jumbotron{
+  padding: 100px 25px;
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 60px 50px;
+}
+
+.logo {
+  color: #f4511e;
+  font-size: 200px;
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.bg-grey {
+    background-color: #f6f6f6;
+}
+
+.btn-outline-primary{
+  border-color: #4CAF50;
+  color: green;
+  &:hover{
+    background-color: #4CAF50;
+    color: white;
+  }
+}
+
+.btn-outline-info{
+  border-color: #ff9800;
+  color: #ff9800;
+  &:hover{
+    background-color: #ff9800;
+    color: white;
+  }
+}
+
+
+.btn-outline-middle{
+  border-color: #7386D5;
+  color: #7386D5;
+  &:hover{
+    background-color: #7386D5;
+    color: white;
+  }
+}
+
+.slide{
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+.carousel { 
+  height: 192px;
+}
+
+.carousel-control.left {
+    background-image: none;
+    color: #f4511e;
+}
+
+.carousel-control.right {
+    background-image: none;
+    color: #f4511e;
+    right: 0;
+    left: auto;
+}
 .main-wrapper{
   width: 100%;
   float: left;
