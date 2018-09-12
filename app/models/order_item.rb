@@ -38,7 +38,6 @@ class OrderItem < ActiveRecord::Base
 	end
 
 	def reset_left
-		debugger
 		if status =='In'
 			amount = order.amount ? order.amount.to_i+charge.to_i : charge.to_i
 			Order.update(order_id, amount: amount, status: 'In' )
@@ -59,6 +58,16 @@ class OrderItem < ActiveRecord::Base
 			self.errors[:base] << "This order is not active"
 		elsif self.item.left < self.quantity
 			self.errors[:base] << "Invalid quantity"
+	    else 
+	    	does_already_exist
+		end
+	end
+
+	private
+	def does_already_exist
+		item_exist = OrderItem.where(order_id: self.order_id, item_id: self.item_id)[0]
+		if item_exist
+			self.errors[:base] << item_exist.item.name + " already added you can update if you want"
 		end
 	end
 
