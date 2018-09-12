@@ -9,8 +9,8 @@ class ItemsController < ApplicationController
 	end
 
 	def search_items
-		items = Item.search_by(params[:input])
-		render json: {items: items}
+		items = Item.search_by(params[:term])
+		render json: items
 	end
 
 	def new		

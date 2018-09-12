@@ -39,7 +39,11 @@ Rails.application.routes.draw do
     end
     resources :calanders
   end
-  resources :dashboards
+  resources :dashboards do
+    collection do
+      get :demo, format: :json
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

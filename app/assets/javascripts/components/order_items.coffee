@@ -6,8 +6,24 @@
     quantity: ""
     value: 10
     errors: []
-    searchedItems: []
     showDelete: true
+    itemName: ''
+
+  componentDidMount: ->
+    $('#tags').autocomplete(
+      source: '/items/search_items'
+      select: ((event, ui) ->
+        @setState
+          itemId: ui.item.id
+        false
+      ).bind this
+      focus: (( event, ui ) ->
+        @setState
+          itemName: ui.item.name
+        false
+      ).bind this
+    ).autocomplete('instance')._renderItem = (ul, item) ->
+      $('<li>').append('<div>' + item.name +  '</div>').appendTo ul   
 
   saveItem: (e)->   
     if e.key == 'Enter'
@@ -22,35 +38,19 @@
         items: result.items,
         quantity: '',
         itemId: '',
-        name: ''
+        itemName: ''
         errors: []
     else
       @setState
         errors: result.errors
 
-
-
   loadItems: (e)->
     @setState
-      name: e.target.value
-    if e.target.value != ''
-      OrderApi.request('/items/search_items', 'GET', {input: e.target.value}, @showItems)
-    else
-      @setState({ searchedItems: [] })
-
-  showItems: (result) ->
-    @setState
-      searchedItems: result.items
+      itemName: e.target.value
 
   getQuantity: (e) ->
     @setState
-      quantity: e.target.value
-
-  selectItem: (item, e)->
-    @setState
-      name: item.name,
-      searchedItems: [],
-      itemId: item.id
+      quantity: e.target.value  
 
   inItem: (item, otype, e)->    
     OrderApi.request('/order_items/mark_complete', 'GET', {id: item, status: otype}, @saveSuccess)
@@ -69,7 +69,7 @@
   render: ->
     <div className="col-md-12 panel-default edit-list">
       <div>
-        <ul>
+        <ul className="error-list">
           {
             @state.errors.map((msg, i) ->
               <li>{msg}</li>
@@ -83,26 +83,16 @@
           if (@props.order.status != 'Completed')
             <div className="panel-body">
               <form className="form-horizontal center">
-                <div className="control-group">
+                <div className="control-group">                  
                   <div className="col-md-4">
                     <label>Product Name</label>
-                    <input type="text" name="name" placeholder= "Product" autoComplete="off" className="form-control" value={@state.name} onChange={@loadItems} />
-                    <div>
-                      <ul ref="playerslist" className="ui-autocomplete">
-                        {
-                          @state.searchedItems.map (((item, index) ->
-                            <li key={index} onClick ={@selectItem.bind(this, item ) } > {item.name}
-                            </li>
-                          ).bind(this))
-                        }                      
-                      </ul>
-                    </div>
+                    <input id="tags" type="text" name="name" placeholder= "Product" autoComplete="off" className="form-control" value={@state.itemName} onChange={@loadItems}/>
                   </div>
                 </div>
                 <div className="control-group">   
                   <div className="col-md-4">
                     <label>Quantity</label>
-                    <input type="number" name="quantity" placeholder= "Enter quantity and hit enter key" className="form-control" onChange={@getQuantity} value={@state.quantity} onKeyPress={@saveItem} />
+                    <input type="number" min="1" name="quantity" placeholder= "Enter quantity and hit enter key" className="form-control" onChange={@getQuantity} value={@state.quantity} onKeyPress={@saveItem} />
                   </div>
                 </div>
               </form>
@@ -131,7 +121,7 @@
                       <td>{i+1}</td>
                       <td>{item.name}</td>
                       <td> 
-                        <span contentEditable={true} onInput={@changeQuantity.bind(this, item.id)}>
+                        <span contentEditable="true" onInput={@changeQuantity.bind(this, item.id)} className="editable-input">
                           {item.quantity}
                         </span>
                       </td>

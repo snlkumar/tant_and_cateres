@@ -7,3 +7,9 @@
     data: inputData
     success: onSuccess
     error: onError
+
+@OrderApi.getItemJson = (url) ->
+    return $.ajax
+    type: 'GET'
+    dataType: 'json'
+    url: url

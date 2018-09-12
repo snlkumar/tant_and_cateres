@@ -22,4 +22,5 @@
 //= require moment 
 //= require fullcalendar
 //= require components
+//= require jquery-ui/widgets/autocomplete
 //= require_tree .

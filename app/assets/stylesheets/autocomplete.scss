@@ -8,7 +8,7 @@ html {
     z-index: 1000;
     cursor: default;
     padding: 0;
-    width: 94.5%;
+    //width: 94.5%;
     list-style: none;
     background-color: #ffffff;    
     -webkit-border-radius: 5px;
@@ -21,11 +21,8 @@ html {
 
 .ui-autocomplete{
 	li {
-	  padding: 3px 20px;
-	}
-	li:hover{
-	  background-color: 'red';
-	}
+	  padding: 3px 10px;
+	}	
 }
 
 body{padding:0px !important;}
@@ -64,11 +61,12 @@ body{padding:0px !important;}
 }
 
 .sgn-btn{border:none; margin:10px 0 0px;}
-//.logout{background:red; color:#fff; border:none;}
 
-.ui-autocomplete li:hover {
-  background: #ccc none repeat scroll 0 0;
+.ui-state-active {
+  border: 1px solid #ffa500 !important;
+  background: #ffa500 !important;
 }
+
 
 .lst-item {
   float: left;
@@ -93,4 +91,8 @@ body{padding:0px !important;}
 }
 
 .logout{margin-top:16px;}
+
+.ui-helper-hidden-accessible{
+  display: none;
+}
 

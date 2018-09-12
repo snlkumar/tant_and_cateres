@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 	has_many :order_items
 	has_many :items, through: :order_items
-	validates_presence_of :name, :address, :phone
+	validates_presence_of :name, :address, :phone, :outdate
 	accepts_nested_attributes_for :order_items
   class << self
 		def search_by_name(params)
@@ -19,7 +19,6 @@ class Order < ActiveRecord::Base
 	end
 
 	def dispatched
-		debugger
 		order_items.where(status: 'Initial').map(&:out)
 		update(status: 'Dispatched')
 	end

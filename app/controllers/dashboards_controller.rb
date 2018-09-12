@@ -3,4 +3,10 @@ class DashboardsController < ApplicationController
 	def index
 		@accounts = Account.all
 	end
+ 
+    def demo
+    	@accounts = Account.all
+    	return render json: @accounts
+    end
+
 end
