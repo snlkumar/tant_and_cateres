@@ -12,7 +12,6 @@
     rowEdit: 0
     error: ''
     oldQuantity: 0
-    newQuantity: 0
 
   componentDidMount: ->
     $('#tags').autocomplete(
@@ -69,15 +68,10 @@
 
   changeQuantity: (item, e)->
     quantity = document.getElementById "editItem"+item
-    OrderApi.request("/order_items/#{item}/change_quantity", 'PUT', {quantity: @state.newQuantity}, @quantityChanged)
+    OrderApi.request("/order_items/#{item}/change_quantity", 'PUT', {quantity: quantity.textContent}, @quantityChanged)
 
   quantityChanged: (response) ->
     if response.status
-      item = @state.items.find(((x) ->
-        x.id == @state.editId
-      ).bind(this))
-      debugger
-      item.quantity = response.quantity
       @setState
         editId: 'ok'
         error: ''
@@ -89,17 +83,13 @@
     @setState
       editId: item.id
       oldQuantity: item.quantity
-      newQuantity: item.quantity
-
 
   resetRow: (itemId, e) ->
+    id = document.getElementById "editItem"+itemId
+    id.textContent = @state.oldQuantity
     @setState
       editId: 'no'
       error: ''
-
-  changeOldValue: (e) ->
-    @setState
-      newQuantity: e.target.value
       
       
 
@@ -148,7 +138,7 @@
                   <th>Day(s)</th>
                   <th>Total Amount</th>
                   <th>Status</th>
-                  <th>Action {@state.editId}</th>
+                  <th>Action {@props.order.status}</th>
                 </tr>
               </thead>
               <tbody>
@@ -157,22 +147,30 @@
                     <tr key={i}>
                       <td>{i+1}</td>
                       <td>{item.name}</td>
-                        <td>
+                      {
+                        if (@props.order.status != 'Completed')
+                          <td>
+                            <span contentEditable="true" onClick={@makeEditable.bind(this, item)} className="editable-input" id="editItem#{item.id}" >
+                              {item.quantity}
+                            </span>
                             {
+                              
                               if @state.editId != @state.rowEdit && @state.editId == item.id
-                                <div>
-                                  <input type="number" value={@state.newQuantity} onChange={@changeOldValue} autoFocus />
+                                <div className="edit-row-action">
                                   <a href="javascript:void(0)" onClick={@changeQuantity.bind(this, item.id)}>
                                     <i className="fa fa-check"></i>
                                   </a>
                                   <a href="javascript:void(0)" onClick={@resetRow.bind(this, item.id)}>
                                     <i style={{color: 'red'}} className="fa fa-close" ></i>
                                   </a>
+                                  <span className="has-error"> {@state.error}</span>
                                 </div>
-                              else
-                                <div onClick={@makeEditable.bind(this, item)}>{item.quantity}</div>
                             }
-                        </td>
+                          </td>
+                        else
+                          item.quantity
+
+                      }
                       <td>{item.daily_charge}</td>
                       <td>{item.days}</td>
                       <td>{item.charge}</td>

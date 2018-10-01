@@ -18,7 +18,11 @@ class OrderItemsController < ApplicationController
 	end
 
 	def change_quantity
-		debugger
+		if @oi.update_attributes(quantity: params[:quantity])
+			return render json: {status: true, message: 'Item updated successfully.', quantity: params[:quantity]}
+		else
+		  return render json: {status: false, errors: @oi.errors.full_messages}
+		end
 	end
 
 	def destroy

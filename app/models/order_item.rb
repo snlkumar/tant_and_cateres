@@ -1,7 +1,7 @@
 class OrderItem < ActiveRecord::Base
 	belongs_to :order
 	belongs_to :item
-	validate :record, on: :create
+	validate :record
 	# after_create :update_item
 	after_update :reset_left, if: :status_changed?
 	# after_destroy :reset_left #, if: Proc.new {|p| p.status=='Out'}
@@ -58,7 +58,7 @@ class OrderItem < ActiveRecord::Base
 			self.errors[:base] << "This order is not active"
 		elsif self.item.left < self.quantity
 			self.errors[:base] << "Invalid quantity"
-	    else 
+	    elsif self.new_record?
 	    	does_already_exist
 		end
 	end
