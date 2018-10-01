@@ -8,6 +8,10 @@
     errors: []
     showDelete: true
     itemName: ''
+    editId: 0
+    rowEdit: 0
+    error: 'Invalid input'
+    oldQuantity: 0
 
   componentDidMount: ->
     $('#tags').autocomplete(
@@ -63,8 +67,26 @@
     if moment(idate).add(5, 'm') > moment(Date.now()) then "show" else "hide"
 
   changeQuantity: (item, e)->
-    debugger
-    OrderApi.request("/order_items/#{item}/change_quantity", 'PUT', {quantity: e.target.innerHTML}, @saveSuccess)
+    @setState
+      editId: 'ok'
+    #OrderApi.request("/order_items/#{item}/change_quantity", 'PUT', {quantity: e.target.innerHTML}, @quantityChanged)
+
+  quantityChanged: (response) ->
+    @setState
+      editId: 'ok'
+
+  makeEditable: (item, e) ->
+    @setState
+      editId: item.id
+      oldQuantity: item.quantity
+
+  resetRow: (itemId, e) ->
+    id = document.getElementById "editItem"+itemId
+    id.textContent = @state.oldQuantity
+    @setState
+      editId: 'no'
+      
+      
 
   render: ->
     <div className="col-md-12 panel-default edit-list">
@@ -111,7 +133,7 @@
                   <th>Day(s)</th>
                   <th>Total Amount</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  <th>Action {@state.rowEdit}</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,10 +142,23 @@
                     <tr key={i}>
                       <td>{i+1}</td>
                       <td>{item.name}</td>
-                      <td> 
-                        <span contentEditable="true" onInput={@changeQuantity.bind(this, item.id)} className="editable-input">
+                      <td>
+                        <span contentEditable="true" onClick={@makeEditable.bind(this, item)} className="editable-input" id="editItem#{item.id}" >
                           {item.quantity}
                         </span>
+                        {
+                          
+                          if @state.editId != @state.rowEdit && @state.editId == item.id
+                            <div className="edit-row-action">
+                              <a href="javascript:void(0)" onClick={@changeQuantity.bind(this, item.id)}>
+                                <i className="fa fa-check"></i>
+                              </a>
+                              <a href="javascript:void(0)" onClick={@resetRow.bind(this, item.id)}>
+                                <i style={{color: 'red'}} className="fa fa-close" ></i>
+                              </a>
+                              <span className="has-error"> {@state.error}</span>
+                            </div>
+                        }
                       </td>
                       
                       <td>{item.daily_charge}</td>
