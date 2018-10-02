@@ -76,11 +76,11 @@
       item = @state.items.find(((x) ->
         x.id == @state.editId
       ).bind(this))
-      debugger
       item.quantity = response.quantity
       @setState
         editId: 'ok'
         error: ''
+      toastr.success(response.message, {positionClass: "toast-top-center"})
     else
       @setState
         error: response.errors[0]
@@ -115,7 +115,7 @@
         </ul>
       </div>
       <div className="panel panel-primary">
-        <div className="panel-heading">items for order</div>
+        <div className="panel-heading">items for order {@props.order.name}</div>
         {
           if (@props.order.status != 'Completed')
             <div className="panel-body">
@@ -148,7 +148,7 @@
                   <th>Day(s)</th>
                   <th>Total Amount</th>
                   <th>Status</th>
-                  <th>Action {@state.editId}</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +160,7 @@
                         <td>
                             {
                               if @state.editId != @state.rowEdit && @state.editId == item.id
-                                <div>
+                                <div className="edit-row-action">
                                   <input type="number" value={@state.newQuantity} onChange={@changeOldValue} autoFocus />
                                   <a href="javascript:void(0)" onClick={@changeQuantity.bind(this, item.id)}>
                                     <i className="fa fa-check"></i>
@@ -168,6 +168,7 @@
                                   <a href="javascript:void(0)" onClick={@resetRow.bind(this, item.id)}>
                                     <i style={{color: 'red'}} className="fa fa-close" ></i>
                                   </a>
+                                  <span className="has-error">{@state.error}</span>
                                 </div>
                               else
                                 <div onClick={@makeEditable.bind(this, item)}>{item.quantity}</div>

@@ -13,8 +13,12 @@ class OrderItemsController < ApplicationController
 	end
 
 	def mark_complete
-		params[:status]=='O' ? @oi.out : @oi.complete		
-		send_response
+		params[:status]=='O' ? @oi.out : @oi.complete	
+		if @oi.errors.any?
+			return render json: {status: false, errors: @oi.errors.full_messages}
+		else	
+		   send_response
+		end
 	end
 
 	def change_quantity

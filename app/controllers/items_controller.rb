@@ -9,8 +9,8 @@ class ItemsController < ApplicationController
 	end
 
 	def search_items
-		items = Item.search_by(params[:term])
-		render json: items
+		items = Item.search_by(params[:q]).paginate(:page => params[:page] || 1, :per_page => 10)
+		render json: {items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page}
 	end
 
 	def new		
@@ -22,11 +22,13 @@ class ItemsController < ApplicationController
 	def create
 		params[:item][:left] = params[:item][:quantity]
 		@item = Item.new params[:item].permit!
-		if @item.save			
-			items = get_items
-		  render json: {message: 'Product Added successfuly.', items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page}
-		else
-			render json: {error: @item.errors.full_messages}
+		respond_to do |format|
+			if @item.save			
+				items = get_items
+			    format.json { render json: {message: 'Product Added successfuly.', items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page} }
+			else
+				format.json { render json: {error: @item.errors.full_messages}, status: :unprocessable_entity}
+			end
 		end
 	end
 

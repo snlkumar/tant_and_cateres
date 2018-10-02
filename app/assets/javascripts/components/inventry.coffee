@@ -37,7 +37,14 @@
         return
 
   searchByName: (e) ->
-    OrderApi.request("/orders/search", 'GET', {q: e.target.value}, @saveSuccess)
+    OrderApi.request("/items/search_items", 'GET', {q: e.target.value}, @searchedResult)
+
+  searchedResult: (response) ->
+    @setState
+      items: response.items
+      nextPage: response.next_page
+      currentPage: response.current_page
+      prevPage: response.previous_page
 
   getName: (e) ->
     @setState
