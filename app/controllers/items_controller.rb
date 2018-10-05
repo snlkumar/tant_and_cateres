@@ -9,7 +9,12 @@ class ItemsController < ApplicationController
 	end
 
 	def search_items
-		items = Item.search_by(params[:q]).paginate(:page => params[:page] || 1, :per_page => 10)
+		items = Item.search_by(params[:term])
+		render json:  items
+	end
+
+	def filter_items
+		items = Item.filter_items(params[:q]).paginate(:page => params[:page] || 1, :per_page => 10)
 		render json: {items: items, next_page: items.next_page, current_page: items.current_page, previous_page: items.previous_page}
 	end
 

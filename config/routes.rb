@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   constraints SubdomainConstraint do
     resources :items do
       collection do
-        get :search_items
+        get :search_items, :filter_items
       end
     end
     resources :orders do

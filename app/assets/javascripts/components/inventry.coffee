@@ -37,7 +37,7 @@
         return
 
   searchByName: (e) ->
-    OrderApi.request("/items/search_items", 'GET', {q: e.target.value}, @searchedResult)
+    OrderApi.request("/items/filter_items", 'GET', {q: e.target.value}, @searchedResult)
 
   searchedResult: (response) ->
     @setState
